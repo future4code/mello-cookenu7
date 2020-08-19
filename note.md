@@ -22,6 +22,9 @@ GET /user/profile
 A partir do token de autenticação fornecido no login, usuário deverá ser capaz de:
 - Ver as suas informações NÃO SENSÍVEIS salvas no banco (id, nome e e-mail)
 
+
+***********************************************************
+=== OK ===
 ### 4. Criar receitas
 POST /recipe
 
@@ -29,6 +32,7 @@ Usuário poderá criar uma receita. Ela deve ter:
 - Título
 - Descrição/modo de preparo
 - Data de criação
+**********************************************************
 
 ### 5. Seguir usuário
 POST /user/follow
@@ -73,3 +77,6 @@ CREATE TABLE CookenuRecipes (
     creator_user_id varchar(255) NOT NULL,
     FOREIGN KEY (creator_user_id) REFERENCES CookenuUsers(id)
 );
+
+SELECT * FROM CookenuUsers;
+SELECT * FROM CookenuRecipes;
