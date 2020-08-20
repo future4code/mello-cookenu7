@@ -1,7 +1,7 @@
 import { BaseDatabase } from "./BaseDatabase";
 
 export class UserDatabase extends BaseDatabase {
-    private static TABLE_NAME: string = "Users";
+    private static TABLE_NAME_USERS: string = "CookenuUsers";
 
     public async createUser(
         id: string, 
@@ -16,7 +16,7 @@ export class UserDatabase extends BaseDatabase {
                 email,
                 password
             })
-            .into(UserDatabase.TABLE_NAME)
+            .into(UserDatabase.TABLE_NAME_USERS)
         
     }
 
@@ -25,7 +25,7 @@ export class UserDatabase extends BaseDatabase {
     ) :Promise<any> {
         const result = await this.getConnection()
             .select("*")
-            .from(UserDatabase.TABLE_NAME)
+            .from(UserDatabase.TABLE_NAME_USERS)
             .where ({ email });
 
         return result[0];
@@ -36,7 +36,7 @@ export class UserDatabase extends BaseDatabase {
     ) :Promise<any> {
         const result = await this.getConnection()
             .select("*")
-            .from(UserDatabase.TABLE_NAME)
+            .from(UserDatabase.TABLE_NAME_USERS)
             .where ({ id });
 
         return result[0];
