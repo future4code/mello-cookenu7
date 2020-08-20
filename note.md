@@ -32,6 +32,7 @@ Usuário poderá criar uma receita. Ela deve ter:
 - Título
 - Descrição/modo de preparo
 - Data de criação
+
 **********************************************************
 === OK ===
 ### 5. Seguir usuário

@@ -6,6 +6,8 @@ import { login } from "./endpoints/login";
 import { getUserProfile } from "./endpoints/getUserProfile";
 import createRecipe from "./endpoints/createRecipe";
 import { followUser } from "./endpoints/followUser";
+import { getRecipe } from "./endpoints/getRecipe";
+
 
 dotenv.config();
 
@@ -19,6 +21,7 @@ app.get("/user/profile", getUserProfile)
 
 //RECIPES
 app.post("/recipe", createRecipe)
+app.get("/recipe/:id", getRecipe)
 
 //FOLLOW USERS
 app.post("/user/follow", followUser)
