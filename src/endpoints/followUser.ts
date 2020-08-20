@@ -10,7 +10,7 @@ export const followUser = async (req: Request, res: Response) => {
         const userIdToFollow = req.body.userIdToFollow;
 
         if (!userIdToFollow || userIdToFollow === "") {
-            throw new Error("")
+            throw new Error("Incorrect id!")
         }
 
         const authenticator = new Authenticator();
