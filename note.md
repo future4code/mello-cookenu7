@@ -33,12 +33,13 @@ Usuário poderá criar uma receita. Ela deve ter:
 - Descrição/modo de preparo
 - Data de criação
 **********************************************************
-
+=== OK ===
 ### 5. Seguir usuário
 POST /user/follow
 
 Um usuário deve poder seguir outros usuários - fornecer o ID do usuário que deseja seguir
 ``` um usuário seguir outro, não significa que "esse outro" está seguindo o primeiro ```
+**********************************************************
 
 ### 6. Feed
 GET /user/feed
