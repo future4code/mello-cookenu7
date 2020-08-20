@@ -5,6 +5,20 @@ import { FollowDatabase } from "../data/FollowDatabase";
 
 export const unfollowUser = async (req: Request, res: Response) => {
     try {
+        const token = req.headers.authorization as string;
+
+        const userIdToUnfollow = req.body.userIdToUnfollow;
+
+        if (!userIdToUnfollow || userIdToUnfollow === "") {
+            throw new Error("Incorrect id!")
+        }
+
+        const authenticator = new Authenticator();
+        const authenticationData = authenticator.getData(token);
+
+        const followDatabase = new FollowDatabase();
+        await followDatabase.unfollowUser(authenticationData.id, userIdToUnfollow)
+
         res
         .status(200)
         .send({
