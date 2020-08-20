@@ -32,7 +32,6 @@ Usuário poderá criar uma receita. Ela deve ter:
 - Título
 - Descrição/modo de preparo
 - Data de criação
-
 **********************************************************
 === OK ===
 ### 5. Seguir usuário
@@ -51,8 +50,11 @@ Usuário pode visualizar as receitas criadas pelos usuários que ele segue.
 ### 7. Pegar perfil de outro usuário
 GET /user/:id
 
+**********************************************************
+=== OK ===
 ### 8. Pegar receita
 GET /recipe/:id
+**********************************************************
 
 ### 9. Deixar de seguir usuário
 POST /user/unfollow
@@ -80,5 +82,13 @@ CREATE TABLE CookenuRecipes (
     FOREIGN KEY (creator_user_id) REFERENCES CookenuUsers(id)
 );
 
+CREATE TABLE CookenuUserFollow (
+	user_id varchar(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES CookenuUsers(id),
+    user_id_to_follow varchar(255) NOT NULL,
+    FOREIGN KEY (user_id_to_follow) REFERENCES CookenuUsers(id)
+);
+
 SELECT * FROM CookenuUsers;
 SELECT * FROM CookenuRecipes;
+SELECT * FROM CookenuUserFollow;

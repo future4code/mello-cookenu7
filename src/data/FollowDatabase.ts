@@ -14,4 +14,17 @@ export class FollowDatabase extends BaseDatabase {
             })
             .into(FollowDatabase.TABLE_NAME_FOLLOW)
     }
+
+    public async unfollowUser(
+        userId: string,
+        userIdToUnfollow: string
+    ) :Promise<void> {
+        await this.getConnection()
+            .delete()
+            .from(FollowDatabase.TABLE_NAME_FOLLOW)
+            .where({
+                user_id: userId,
+                user_id_to_follow: userIdToUnfollow
+            })
+    }
 }
