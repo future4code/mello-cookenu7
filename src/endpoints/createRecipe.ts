@@ -1,13 +1,15 @@
 import { Request, Response } from "express";
 import { idGenerator } from "../services/idGenerator";
 import { RecipeDatabase } from "../data/RecipeDatabase";
+import { Authenticator } from "../services/Authenticator";
 
 export default async function createRecipe (req: Request, res: Response) {
     try {
+        const token = req.headers.authorization as string;
+
         const title = req.body.title;
         const description = req.body.description;
         const date = req.body.date;
-        const creatorUserId = req.body.creatorUserId;
 
         if (!title || !description || !date) {
             throw new Error ("Insert all required informations");
@@ -16,13 +18,16 @@ export default async function createRecipe (req: Request, res: Response) {
         const generateId = new idGenerator;
         const id = generateId.generateId();
 
+        const authenticator = new Authenticator;
+        const authenticationData = authenticator.getData(token)
+
         const recipeDatabase = new RecipeDatabase();
         await recipeDatabase.addRecipe(
             id,
             title,
             description,
             date,
-            creatorUserId
+            authenticationData.id
         );
 
         res
