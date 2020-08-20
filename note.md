@@ -87,6 +87,8 @@ CREATE TABLE CookenuRecipes (
     FOREIGN KEY (creator_user_id) REFERENCES CookenuUsers(id)
 );
 
+- Tabela de followers (CookenuUserFollow)
+
 CREATE TABLE CookenuUserFollow (
 	user_id varchar(255) NOT NULL,
     FOREIGN KEY (user_id) REFERENCES CookenuUsers(id),
@@ -97,3 +99,32 @@ CREATE TABLE CookenuUserFollow (
 SELECT * FROM CookenuUsers;
 SELECT * FROM CookenuRecipes;
 SELECT * FROM CookenuUserFollow;
+
+**********************************************************
+
+### DESAFIOS 
+
+### 10. Criar mais um tipo de usuário
+Adicionar um role para representar o tipo de usuário. 
+Alterar o signUp e o login
+
+### 11. Editar receita
+Usuário "NORMAL" edita sua própria receita
+Retornar erro se a receita não for dele
+
+### 12. Deletar receita
+Usuário "NORMAL" deleta sua própria receita
+Retornar erro se a receita não for dele
+Se usuário for "ADMIN", permitir que ele delete qualquer post 
+
+### 13. Deletar conta
+Usuário "ADMIN" pode deletar a conta de qualquer usuário
+Retornar erro se usuário for "NORMAL"
+Lembrar que ao deletar, deletar todas as relações como receita e usuários que segue
+
+### 14. Refresh token
+Implementar e alterar os endpoints para que haja um refresh token
+Coloque o tempo de expiração de 10min para o access token e 1 ano para o refresh token
+
+ALTER TABLE CookenuUsers
+ADD role ENUM("ADMIN","NORMAL") DEFAULT "NORMAL";

@@ -10,10 +10,15 @@ export const signUp = async (req: Request, res: Response) => {
         const name = req.body.name;
         const email = req.body.email;
         const password = req.body.password;
+        const role = req.body.role;
 
         if (!name || !email || !password) {
             throw new Error ("Insert all required informations");
         }
+
+        if (!password || password.length < 6) {
+            throw new Error("Invalid password");
+          }
 
         if (email.indexOf("@") === -1) {
             throw new Error ("Invalid e-mail");
@@ -30,11 +35,11 @@ export const signUp = async (req: Request, res: Response) => {
             id,
             name,
             email,
-            hashPassword
+            hashPassword,
+            role
         );
 
-        const authenticator = new Authenticator;
-        const token = authenticator.generateToken({ id })
+        const token = Authenticator.generateToken({ id, role })
 
         res
             .status(200)

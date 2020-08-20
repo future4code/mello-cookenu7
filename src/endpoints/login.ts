@@ -19,8 +19,10 @@ export const login = async (req: Request, res: Response) => {
             throw new Error ("User or password incorrect")
         }
 
-        const authenticator = new Authenticator;
-        const token = authenticator.generateToken({ id: user.id });
+        const token = Authenticator.generateToken({ 
+            id: user.id,
+            role: user.role
+        });
 
         res
             .status(200)

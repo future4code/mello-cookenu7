@@ -1,6 +1,9 @@
 import * as jwt from "jsonwebtoken";
 
 export class Authenticator {
+    static generateToken(arg0: { id: string; role: any; }) {
+        throw new Error("Method not implemented.");
+    }
     public generateToken(data: AuthenticationData) :string {
         return jwt.sign(
             data,
@@ -15,11 +18,18 @@ export class Authenticator {
             process.env.JWT_KEY as string,
         ) as any;
         return {
-            id: data.id
+            id: data.id,
+            role: data.role
         }
     }
 }
 
+enum USER_ROLES {
+    NORMAL = "NORMAL",
+    ADMIN = "ADMIN"
+  }
+
 interface AuthenticationData {
-    id: string
+    id: string,
+    role: USER_ROLES
 }
