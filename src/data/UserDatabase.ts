@@ -41,4 +41,12 @@ export class UserDatabase extends BaseDatabase {
 
         return result[0];
     }
+    public async getUser(
+    ) :Promise<any> {
+        const result = await this.getConnection()
+            .select("*")
+            .from(UserDatabase.TABLE_NAME_USERS)
+            
+        
+        return result[0]  
 }
