@@ -42,15 +42,12 @@ POST /user/follow
 Um usuário deve poder seguir outros usuários - fornecer o ID do usuário que deseja seguir
 ``` um usuário seguir outro, não significa que "esse outro" está seguindo o primeiro ```
 **********************************************************
-
-
+=== OK ===
 ### 6. Feed
 GET /user/feed
 
 Usuário pode visualizar as receitas criadas pelos usuários que ele segue.
 * RECEITAS DEVEM ESTAR ORDENADAS PELA DATA DE CRIAÇÃO * 
-
-
 **********************************************************
 === OK ===
 ### 7. Pegar perfil de outro usuário

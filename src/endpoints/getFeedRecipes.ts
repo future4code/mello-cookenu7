@@ -11,11 +11,12 @@ export default async function getFeedRecipes (req: Request, res: Response) {
         const authenticationData = authenticator.getData(token);
 
         const recipeDatabase = new RecipeDatabase();
-        const feed = await recipeDatabase.getFeedRecipes(authenticationData.id)
+        const feed = await recipeDatabase.getFeed(authenticationData.id)
 
         res
             .status(200)
             .send({
+                message: "Feed",
                 recipes: feed
             })
     } catch (error) {

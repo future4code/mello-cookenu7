@@ -33,42 +33,40 @@ export class RecipeDatabase extends BaseDatabase {
         return result[0]
     }
     
-    public async getFeedRecipes(
+    public async getFeed(
         id: string
     ) :Promise<any> {
         const result = await this.getConnection().raw(`
             SELECT
-                u.id,
+                f.user_id_to_follow,
                 u.name,
-                r.id as recipe_id,
+                r.id,
                 r.title,
                 r.description,
                 r.date
             FROM 
                 CookenuRecipes r
             JOIN
-                CookenuUserFollow f ON r.user_id = f.user_id_to_follow
+                CookenuUserFollow f ON r.creator_user_id = f.user_id_to_follow
             JOIN
                 CookenuUsers u ON f.user_id_to_follow = u.id
             WHERE 
                 f.user_id = "${id}"
             ORDER BY
                 date DESC;
-        `)
+        `);
 
         const feed = [];
 
         for(const item of result[0]) {
             
-            const creationFormattedDate = moment(item.date). format("DD/MM/YYYY");
+            const creationFormattedDate = moment(item.date).format("DD/MM/YYYY");
 
             feed.push({
-                id:item.recipe_id,
+                createdAt: creationFormattedDate,
+                userName: item.name,
                 title: item.title,
                 description: item.description,
-                createdAt: creationFormattedDate,
-                userId: item.user_to_follow_id,
-                userName: item.name
             })
         }
 
