@@ -77,7 +77,7 @@ export class RecipeDatabase extends BaseDatabase {
         id: string,
         title: string,
         description: string
-    ) {
+    ) :Promise<any> {
         let queryFields = [
             title && `title = ${title}`,
             description && `description = ${description}`

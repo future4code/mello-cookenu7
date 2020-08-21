@@ -107,15 +107,12 @@ SELECT * FROM CookenuUserFollow;
 Adicionar um role para representar o tipo de usuário. 
 Alterar o signUp e o login
 **********************************************************
-
-
-### 11. Editar receita
+=== OK === SÓ ADMIN ESTÁ PODENDO EDITAR
+### 11. Editar receita 
 Usuário "NORMAL" edita sua própria receita
 Retornar erro se a receita não for dele
-
-
 **********************************************************
-=== OK ===
+=== OK === SÓ ADMIN ESTÁ PODENDO DELETAR
 ### 12. Deletar receita
 Usuário "NORMAL" deleta sua própria receita
 Retornar erro se a receita não for dele

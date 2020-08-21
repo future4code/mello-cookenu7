@@ -26,9 +26,9 @@ app.get("/user/feed", getFeedRecipes)
 
 //RECIPES
 app.post("/recipe", createRecipe)
-app.post("/recipe/edit", editRecipe)
 app.get("/recipe/:id", getRecipe)
 app.delete("/recipe/delete/:id", deleteRecipe)
+app.post("/recipe/edit/:id", editRecipe)
 
 //FOLLOW USERS
 app.post("/user/follow", followUser)
