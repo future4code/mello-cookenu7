@@ -15,11 +15,16 @@ export const login = async (req: Request, res: Response) => {
         const hashManager = new HashManager();
         const isPasswordCorrect = await hashManager.compare(password, user.password);
 
-        if (!isPasswordCorrect) {
+        if (!req.body.email || req.body.email.indexOf("@") === -1) {
+            throw new Error("Invalid email");
+        }
+
+        if (!email || !isPasswordCorrect) {
             throw new Error ("User or password incorrect")
         }
 
-        const token = Authenticator.generateToken({ 
+        const authenticator = new Authenticator();
+        const token = authenticator.generateToken({ 
             id: user.id,
             role: user.role
         });

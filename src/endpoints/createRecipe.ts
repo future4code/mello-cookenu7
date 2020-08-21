@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { idGenerator } from "../services/idGenerator";
 import { RecipeDatabase } from "../data/RecipeDatabase";
 import { Authenticator } from "../services/Authenticator";
+import { BaseDatabase } from "../data/BaseDatabase";
 
 export default async function createRecipe (req: Request, res: Response) {
     try {
@@ -15,10 +16,10 @@ export default async function createRecipe (req: Request, res: Response) {
             throw new Error ("Insert all required informations");
         }
 
-        const generateId = new idGenerator;
+        const generateId = new idGenerator();
         const id = generateId.generateId();
 
-        const authenticator = new Authenticator;
+        const authenticator = new Authenticator();
         const authenticationData = authenticator.getData(token)
 
         const recipeDatabase = new RecipeDatabase();
@@ -42,5 +43,7 @@ export default async function createRecipe (req: Request, res: Response) {
             .send({
                 message: error.sqlMessage || error.message
             })
+    }  finally {
+        await BaseDatabase.destroyConnection();
     }
 }
