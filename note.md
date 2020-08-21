@@ -42,15 +42,12 @@ POST /user/follow
 Um usuário deve poder seguir outros usuários - fornecer o ID do usuário que deseja seguir
 ``` um usuário seguir outro, não significa que "esse outro" está seguindo o primeiro ```
 **********************************************************
-
-
+=== OK ===
 ### 6. Feed
 GET /user/feed
 
 Usuário pode visualizar as receitas criadas pelos usuários que ele segue.
 * RECEITAS DEVEM ESTAR ORDENADAS PELA DATA DE CRIAÇÃO * 
-
-
 **********************************************************
 === OK ===
 ### 7. Pegar perfil de outro usuário
@@ -110,15 +107,12 @@ SELECT * FROM CookenuUserFollow;
 Adicionar um role para representar o tipo de usuário. 
 Alterar o signUp e o login
 **********************************************************
-
-
-### 11. Editar receita
+=== OK === SÓ ADMIN ESTÁ PODENDO EDITAR
+### 11. Editar receita 
 Usuário "NORMAL" edita sua própria receita
 Retornar erro se a receita não for dele
-
-
 **********************************************************
-=== OK ===
+=== OK === SÓ ADMIN ESTÁ PODENDO DELETAR
 ### 12. Deletar receita
 Usuário "NORMAL" deleta sua própria receita
 Retornar erro se a receita não for dele
@@ -136,3 +130,18 @@ Coloque o tempo de expiração de 10min para o access token e 1 ano para o refre
 
 ALTER TABLE CookenuUsers
 ADD role ENUM("ADMIN","NORMAL") DEFAULT "NORMAL";
+
+SELECT * FROM USERS
+
+SELECT 
+	r.id,
+	r.title,
+	r.description,
+	r.created_at AS createdAt,
+	u.id AS userId,
+	u.name AS userName
+FROM
+	Follow f JOIN User u ON f.followed_id = u.id
+	JOIN Recipes r ON r.creator_id = u.id
+WHERE 
+	f.user_id = 'id de quem segue'

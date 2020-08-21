@@ -7,9 +7,9 @@ export default async function deleteRecipe (req: Request, res: Response) {
     try {
         const token = req.headers.authorization as string;
         const id = req.params.id;
-
+        
         const authenticator = new Authenticator();
-        const authenticationData = authenticator.getData(token)
+        const authenticationData = authenticator.getData(token);
 
         if (authenticationData.role !== "ADMIN") {
             throw new Error("Only an admin user can access this funcionality")
@@ -17,7 +17,7 @@ export default async function deleteRecipe (req: Request, res: Response) {
 
         const recipeDatabase = new RecipeDatabase();
         await recipeDatabase.deleteRecipe(id);
-        
+
         res
             .status(200)
             .send({
@@ -25,10 +25,10 @@ export default async function deleteRecipe (req: Request, res: Response) {
             })
     } catch(error) {
         res
-        .status(400)
-        .send({
-            message: error.sqlMessage || error.message
-        })
+            .status(400)
+            .send({
+                message: error.sqlMessage || error.message
+            })
     }  finally {
         await BaseDatabase.destroyConnection();
     }
