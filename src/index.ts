@@ -11,6 +11,7 @@ import { unfollowUser } from "./endpoints/unfollowUser";
 import { getAnotherProfile } from "./endpoints/getAnotherProfile";
 import deleteRecipe from "./endpoints/deleteRecipe";
 import getFeedRecipes from "./endpoints/getFeedRecipes";
+import editRecipe from "./endpoints/editRecipe";
 
 dotenv.config();
 
@@ -25,6 +26,7 @@ app.get("/user/feed", getFeedRecipes)
 
 //RECIPES
 app.post("/recipe", createRecipe)
+app.post("/recipe/edit", editRecipe)
 app.get("/recipe/:id", getRecipe)
 app.delete("/recipe/delete/:id", deleteRecipe)
 

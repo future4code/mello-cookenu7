@@ -73,6 +73,29 @@ export class RecipeDatabase extends BaseDatabase {
         return feed;
     }
 
+    public async editRecipe(
+        id: string,
+        title: string,
+        description: string
+    ) {
+        let queryFields = [
+            title && `title = ${title}`,
+            description && `description = ${description}`
+        ]
+
+        queryFields = queryFields.filter(field => field)
+
+        if(!queryFields.length) {
+            throw new Error("Enter a value to edit")
+        }
+
+        await this.getConnection().raw(`
+            UPDATE ${RecipeDatabase.TABLE_NAME_RECIPES}
+            SET ${queryFields.join(",")}
+            WHERE id = "${id}"
+        `)
+    }
+
     public async deleteRecipe(
         id: string
     ) :Promise<any> {
