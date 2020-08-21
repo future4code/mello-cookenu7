@@ -136,3 +136,18 @@ Coloque o tempo de expiração de 10min para o access token e 1 ano para o refre
 
 ALTER TABLE CookenuUsers
 ADD role ENUM("ADMIN","NORMAL") DEFAULT "NORMAL";
+
+SELECT * FROM USERS
+
+SELECT 
+	r.id,
+	r.title,
+	r.description,
+	r.created_at AS createdAt,
+	u.id AS userId,
+	u.name AS userName
+FROM
+	Follow f JOIN User u ON f.followed_id = u.id
+	JOIN Recipes r ON r.creator_id = u.id
+WHERE 
+	f.user_id = 'id de quem segue'
